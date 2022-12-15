@@ -1,6 +1,6 @@
 name: reaction_askany
 description: Package help show popup reaction like Facebook and wrapper for widget (Show anyone who reaction this message).
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/Iambiengcode/reaction_askany
 repository: https://github.com/Iambiengcode/reaction_askany
 
@@ -23,14 +23,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - packages/reaction_askany/icons/angry.png
-    - packages/reaction_askany/icons/care.png
-    - packages/reaction_askany/icons/haha.png
-    - packages/reaction_askany/icons/like.png
-    - packages/reaction_askany/icons/love.png
-    - packages/reaction_askany/icons/sad.png
-    - packages/reaction_askany/icons/wow.png
+  # assets:
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

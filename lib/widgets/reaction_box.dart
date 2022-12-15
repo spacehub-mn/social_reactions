@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/emotions.dart';
+import 'package:reaction_askany/models/reaction.dart';
 import 'package:reaction_askany/models/reaction_box_paramenters.dart';
 import 'package:reaction_askany/widgets/reaction_page.dart';
 
 class ReactionBox extends StatefulWidget {
-  final List<Emotions> emotions;
-  final Function(Emotions) handlePressed;
+  final List<Reaction> emotions;
+  final Function(Reaction) handlePressed;
   final ReactionBoxParamenters boxParamenters;
-  final Emotions? emotionPicked;
+  final Reaction? emotionPicked;
   const ReactionBox({
     super.key,
     required this.emotions,
@@ -22,7 +22,7 @@ class ReactionBox extends StatefulWidget {
 
 class _ReactionBoxState extends State<ReactionBox> {
   late PageController _pageController;
-  final List<List<Emotions>> _emotions = [];
+  final List<List<Reaction>> _emotions = [];
   int _currentIndex = 0;
 
   @override
@@ -32,8 +32,8 @@ class _ReactionBoxState extends State<ReactionBox> {
       initialPage: _currentIndex,
     );
 
-    List<Emotions> temp = [];
-    for (Emotions emotion in widget.emotions) {
+    List<Reaction> temp = [];
+    for (Reaction emotion in widget.emotions) {
       temp.add(emotion);
       if (temp.length == widget.boxParamenters.quantityPerPage) {
         _emotions.add(temp);
@@ -74,10 +74,10 @@ class _ReactionBoxState extends State<ReactionBox> {
             children: _emotions
                 .map<Widget>(
                   (page) => ReactionPage(
-                    emotions: page,
-                    handlePressed: widget.handlePressed,
+                    reactions: page,
+                    onPressed: widget.handlePressed,
                     boxParamenters: widget.boxParamenters,
-                    emotionPicked: widget.emotionPicked,
+                    currentValue: widget.emotionPicked,
                   ),
                 )
                 .toList(),

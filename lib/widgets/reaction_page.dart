@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/emotions.dart';
+import 'package:reaction_askany/models/reaction.dart';
 import 'package:reaction_askany/models/reaction_box_paramenters.dart';
 import 'package:reaction_askany/widgets/emotion_widget.dart';
 
 class ReactionPage extends StatelessWidget {
-  final List<Emotions> emotions;
-  final Function(Emotions) handlePressed;
+  final List<Reaction> reactions;
+  final Function(Reaction) onPressed;
   final ReactionBoxParamenters boxParamenters;
-  final Emotions? emotionPicked;
+  final Reaction? currentValue;
 
   const ReactionPage({
     super.key,
-    required this.emotions,
-    required this.handlePressed,
+    required this.reactions,
+    required this.onPressed,
     required this.boxParamenters,
-    required this.emotionPicked,
+    required this.currentValue,
   });
 
   @override
@@ -26,13 +26,13 @@ class ReactionPage extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: emotions.length,
+      itemCount: reactions.length,
       itemBuilder: (context, index) {
         return EmotionWidget(
-          emotion: emotions[index],
-          handlePressed: handlePressed,
+          emotion: reactions[index],
+          handlePressed: onPressed,
           boxParamenters: boxParamenters,
-          isSelected: emotions[index] == emotionPicked,
+          isSelected: reactions[index] == currentValue,
         );
       },
     );

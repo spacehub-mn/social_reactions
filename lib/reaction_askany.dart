@@ -1,9 +1,10 @@
 library reaction_askany;
 
 export 'widgets/reaction_wrapper.dart';
+export 'models/reaction.dart';
 
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/emotions.dart';
+import 'package:reaction_askany/models/reaction.dart';
 import 'package:reaction_askany/models/reaction_box_paramenters.dart';
 import 'package:reaction_askany/widgets/reaction_box.dart';
 
@@ -11,8 +12,9 @@ class ReactionAskany {
   static void showReactionBox(
     BuildContext context, {
     required Offset offset,
-    Function(Emotions)? handlePressed,
-    Emotions? emotionPicked,
+    required List<Reaction> reactions,
+    required Function(Reaction) onPressed,
+    Reaction? currentValue,
     ReactionBoxParamenters? boxParamenters,
   }) async {
     final double left = offset.dx;
@@ -64,10 +66,10 @@ class ReactionAskany {
               vertical: 4.0,
             ),
             child: ReactionBox(
-              emotions: Emotions.values,
-              handlePressed: handlePressed ?? (Emotions emo) {},
+              emotions: reactions,
+              handlePressed: onPressed,
               boxParamenters: paramenters,
-              emotionPicked: emotionPicked,
+              emotionPicked: currentValue,
             ),
           ),
         ),

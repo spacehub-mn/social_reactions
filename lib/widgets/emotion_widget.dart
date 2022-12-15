@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/emotions.dart';
+import 'package:reaction_askany/models/reaction.dart';
 import 'package:reaction_askany/models/reaction_box_paramenters.dart';
 
 class EmotionWidget extends StatefulWidget {
-  final Emotions emotion;
-  final Function(Emotions) handlePressed;
+  final Reaction emotion;
+  final Function(Reaction) handlePressed;
   final ReactionBoxParamenters boxParamenters;
   final bool isSelected;
 
@@ -70,10 +70,12 @@ class _EmotionWidgetState extends State<EmotionWidget>
         horizontal: widget.boxParamenters.iconSpacing,
       ),
       alignment: Alignment.center,
-      child: Image.asset(
-        widget.emotion.assetImage,
-        height: widget.boxParamenters.iconSize,
-        width: widget.boxParamenters.iconSize,
+      child: SizedBox.square(
+        dimension: widget.boxParamenters.iconSize,
+        child: Text(
+          widget.emotion.emoji,
+          style: TextStyle(fontSize: widget.boxParamenters.iconSize - 2.0),
+        ),
       ),
     );
   }

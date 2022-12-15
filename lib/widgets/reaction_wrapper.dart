@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../models/emotions.dart';
 import '../models/reaction_box_paramenters.dart';
 import '../reaction_askany.dart';
 
 class ReactionWrapper extends StatefulWidget {
   final Widget child;
   final Widget buttonReaction;
-  final Function(Emotions?)? handlePressed;
+  final Function(Reaction?)? handlePressed;
   final Function()? handlePressedReactions;
   final ReactionBoxParamenters? boxParamenters;
-  final Emotions? initialEmotion;
+  final List<Reaction> reactions;
+  final Reaction? initialEmotion;
 
   const ReactionWrapper({
     super.key,
@@ -20,6 +20,7 @@ class ReactionWrapper extends StatefulWidget {
     this.handlePressed,
     this.handlePressedReactions,
     this.initialEmotion,
+    required this.reactions,
   });
 
   @override
@@ -32,7 +33,7 @@ class _ReactionWrapperState extends State<ReactionWrapper>
   Offset? _beginOffset;
   late final ReactionBoxParamenters boxParamenters =
       widget.boxParamenters ?? ReactionBoxParamenters();
-  Emotions? _emotion;
+  Reaction? _reaction;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _ReactionWrapperState extends State<ReactionWrapper>
       duration: const Duration(seconds: 1),
       vsync: this,
     );
-    _emotion = widget.initialEmotion;
+    _reaction = widget.initialEmotion;
   }
 
   @override
@@ -53,7 +54,7 @@ class _ReactionWrapperState extends State<ReactionWrapper>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: _emotion != null ? 12.0 : 0),
+      padding: EdgeInsets.only(bottom: _reaction != null ? 12.0 : 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +65,7 @@ class _ReactionWrapperState extends State<ReactionWrapper>
             children: [
               widget.child,
               Visibility(
-                visible: _emotion != null,
+                visible: _reaction != null,
                 child: Positioned(
                   bottom: -11,
                   child: GestureDetector(
@@ -78,23 +79,21 @@ class _ReactionWrapperState extends State<ReactionWrapper>
                         curve: Curves.bounceOut,
                       )),
                       child: Container(
-                        padding: const EdgeInsets.all(3.0),
-                        margin: const EdgeInsets.only(
-                          left: 20.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Brightness.light == boxParamenters.brightness
-                              ? Colors.grey.shade100
-                              : Colors.grey.shade800,
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          _emotion?.assetImage ?? '',
-                          height: 16,
-                          width: 16,
-                        ),
-                      ),
+                          padding: const EdgeInsets.all(3.0),
+                          margin: const EdgeInsets.only(
+                            left: 20.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Brightness.light == boxParamenters.brightness
+                                ? Colors.grey.shade100
+                                : Colors.grey.shade800,
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          alignment: Alignment.center,
+                          child: SizedBox.square(
+                            dimension: 16.0,
+                            child: Text(_reaction?.emoji ?? "👍"),
+                          )),
                     ),
                   ),
                 ),
@@ -112,31 +111,32 @@ class _ReactionWrapperState extends State<ReactionWrapper>
                 context,
                 offset: details.globalPosition,
                 boxParamenters: boxParamenters,
-                emotionPicked: _emotion,
-                handlePressed: (Emotions emotion) {
+                currentValue: _reaction,
+                reactions: widget.reactions,
+                onPressed: (Reaction reaction) {
                   _controller.reset();
 
-                  if (emotion == _emotion) {
+                  if (reaction == _reaction) {
                     setState(() {
-                      _emotion = null;
+                      _reaction = null;
                     });
 
                     if (widget.handlePressed != null) {
-                      widget.handlePressed!(_emotion);
+                      widget.handlePressed!(_reaction);
                     }
 
                     return;
                   }
 
                   setState(() {
-                    _emotion = emotion;
+                    _reaction = reaction;
                     _beginOffset = const Offset(.25, -1);
                   });
 
                   _controller.forward();
 
                   if (widget.handlePressed != null) {
-                    widget.handlePressed!(_emotion);
+                    widget.handlePressed!(_reaction);
                   }
                 },
               );
