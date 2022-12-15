@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/reaction.dart';
-import 'package:reaction_askany/models/reaction_box_paramenters.dart';
-import 'package:reaction_askany/widgets/emotion_widget.dart';
+import 'package:social_reactions/models/reaction.dart';
+import 'package:social_reactions/models/reaction_box_paramenters.dart';
+import 'package:social_reactions/widgets/emotion_widget.dart';
 
 class ReactionPage extends StatelessWidget {
   final List<Reaction> reactions;

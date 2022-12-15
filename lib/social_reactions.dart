@@ -4,9 +4,9 @@ export 'widgets/reaction_wrapper.dart';
 export 'models/reaction.dart';
 
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/reaction.dart';
-import 'package:reaction_askany/models/reaction_box_paramenters.dart';
-import 'package:reaction_askany/widgets/reaction_box.dart';
+import 'package:social_reactions/models/reaction.dart';
+import 'package:social_reactions/models/reaction_box_paramenters.dart';
+import 'package:social_reactions/widgets/reaction_box.dart';
 
 class ReactionAskany {
   static void showReactionBox(

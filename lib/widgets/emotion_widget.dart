@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reaction_askany/models/reaction.dart';
-import 'package:reaction_askany/models/reaction_box_paramenters.dart';
+import 'package:social_reactions/models/reaction.dart';
+import 'package:social_reactions/models/reaction_box_paramenters.dart';
 
 class EmotionWidget extends StatefulWidget {
   final Reaction emotion;

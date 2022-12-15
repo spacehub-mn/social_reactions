@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/reaction_box_paramenters.dart';
-import '../reaction_askany.dart';
+import '../social_reactions.dart';
 
 class ReactionWrapper extends StatefulWidget {
   final Widget child;
